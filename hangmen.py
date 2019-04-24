@@ -2,7 +2,7 @@ import re
 import getpass
 
 wordGuessed = False  # indicates if the word is guessed Y/N
-word = ""            # the word to guess
+word_to_guess = ""   # the word to guess
 words_guessed = []   # array with the letters that are already guessed
 tries_done = 0       # how many tries the guesser has made
 max_tries = 10       # max amount of tries
@@ -10,9 +10,9 @@ max_tries = 10       # max amount of tries
 
 # define the word (step 1 of the whole game)
 def set_word(hangmen_word):
-    global word
-    word = hangmen_word
-ss
+    global word_to_guess
+    word_to_guess = hangmen_word
+
 
 # a guess of the guessing player (is a single letter)
 def guess(user_guess):
@@ -41,22 +41,22 @@ def checklist(to_check):
 def hashed_word():
     output = ""
     good_guesses = 0
-    global word
-    for w in word:
+    global word_to_guess
+    for w in word_to_guess:
         if w in words_guessed:
             good_guesses += 1
             output = output + " " + w + " "
         else:
             output = output + " . "
-    if good_guesses == len(word):
+    if good_guesses == len(word_to_guess):
         global wordGuessed
         wordGuessed = True
     return output
 
 
-# returns true if the letter (guessed) is in the word
+# returns true if the letter (guessed) is in the word_to_guess
 def check_guess(to_check):
-        if re.search(to_check, word):
+        if re.search(to_check, word_to_guess):
             return True
         else:
             return False
