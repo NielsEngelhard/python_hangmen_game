@@ -12,3 +12,4 @@ while not game.wordGuessed:  # while the game is not over
     print("Give letter to guess: ")
     user_try = input()  # input of the guesser
     game.guess(user_try)  # check the guess
+print("end of the game, thr word is: " + str(game.getWord))

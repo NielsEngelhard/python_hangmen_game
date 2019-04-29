@@ -63,3 +63,6 @@ class HangmenGame:
             self.tries_done = self.tries_done + 1
             print("WRONG there are " + str(self.max_tries - self.tries_done) + " tries left.")
         print(self.hashed_word())
+
+    def getWord(self):
+        return str(self.word_to_guess)
