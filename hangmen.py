@@ -1,9 +1,11 @@
 import re
+from python_hangmen_game.words import Generator
 
 
 class HangmenGame:
+    g = Generator()
     wordGuessed = False  # indicates if the word is guessed Y/N
-    word_to_guess = ""  # the word to guess
+    word_to_guess = g.getWordFromDictionary()  # the word to guess
     words_guessed = []  # array with the letters that are already guessed
     tries_done = 0  # how many tries the guesser has made
     max_tries = 10  # max amount of tries
@@ -66,3 +68,6 @@ class HangmenGame:
 
     def getWord(self):
         return str(self.word_to_guess)
+
+    def getTries(self):
+        return str(self.tries_done)
