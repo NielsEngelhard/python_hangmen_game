@@ -1,14 +1,14 @@
 import re
-from python_hangmen_game.words import Generator
+from words import Generator
 
 
 class HangmenGame:
     g = Generator()
-    wordGuessed = False  # indicates if the word is guessed Y/N
-    word_to_guess = g.getWordFromDictionary()  # the word to guess
-    words_guessed = []  # array with the letters that are already guessed
-    tries_done = 0  # how many tries the guesser has made
-    max_tries = 10  # max amount of tries
+    wordGuessed = False                      # indicates if the word is guessed Y/N
+    word_to_guess = g.get_from_dictionary()  # the word to guess
+    words_guessed = []                       # array with the letters that are already guessed
+    tries_done = 0                           # how many tries the guesser has made
+    max_tries = 10                           # max amount of tries
 
     # define the word (step 1 of the whole game)
     def set_word(self, hangmen_word):
@@ -53,21 +53,18 @@ class HangmenGame:
 
     # a guess of the guessing player (is a single letter)
     def guess(self, user_guess):
-        if not self.checklist(user_guess):
-            print("This letter is already guessed")
-            print(" ")
-            print(self.words_guessed)
-        elif self.check_guess(user_guess):
-            self.add_letter(user_guess)
-            print("YES! this letter is in the word")
+        if not self.words_guessed:
+            if not self.checklist(user_guess):
+                return "This letter is already guessed"
+            elif self.check_guess(user_guess):
+                self.add_letter(user_guess)
+                return "YES! this letter is in the word"
+            else:
+                self.add_letter(user_guess)
+                self.tries_done = self.tries_done + 1
+                return "WRONG!, this letter isn't in the word"
         else:
-            self.add_letter(user_guess)
-            self.tries_done = self.tries_done + 1
-            print("WRONG there are " + str(self.max_tries - self.tries_done) + " tries left.")
-        print(self.hashed_word())
+            return "END OF GAME: THE WORD IS: " + self.word_to_guess
 
-    def getWord(self):
-        return str(self.word_to_guess)
-
-    def getTries(self):
+    def get_tries(self):
         return str(self.tries_done)
