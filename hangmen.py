@@ -45,6 +45,7 @@ class HangmenGame:
     # return true if all tries are done
     def end_of_game(self):
         if self.max_tries - self.tries_done <= 0:
+            print(self.max_tries - self.tries_done)
             self.wordGuessed = True
 
     # add letter to the "guessed" letters list
@@ -53,7 +54,8 @@ class HangmenGame:
 
     # a guess of the guessing player (is a single letter)
     def guess(self, user_guess):
-        if not self.words_guessed:
+        self.end_of_game()
+        if not self.wordGuessed:
             if not self.checklist(user_guess):
                 return "This letter is already guessed"
             elif self.check_guess(user_guess):

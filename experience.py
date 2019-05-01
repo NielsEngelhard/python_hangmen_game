@@ -8,7 +8,6 @@ class HangmenGUI:
         self.v = StringVar()                # tries done label
         self.word = StringVar()             # the word of the game
         self.message = StringVar()          # message that helps the use
-        self.already_guessed = StringVar()  # all the letters that are already guessed
         self.guess_output = ""
 
         self.game = HangmenGame()
@@ -78,29 +77,22 @@ class HangmenGUI:
         self.label.grid(row=1, column=5)
         self.word.set(self.game.hashed_word())
 
-        # shows the letters that are already guessed
-        self.label = Label(master, textvariable=self.already_guessed, font=("Comic Sans MS", 17))
-        self.label.grid(row=6, column=5)
-        self.already_guessed.set("already guessed: ")
-
         # shows the message for the user (for example: this letter is in the word)
         self.label = Label(master, textvariable=self.message, font=("Comic Sans MS", 10))
         self.label.grid(row=3, column=5)
-        self.already_guessed.set(" ")
+
 
     def make_guess(self, letter):
         self.guess_output = self.game.guess(letter)
         self.update_values()
 
+        change_color = "self.{}_button.configure(bg = 'red')".format(letter)
+        exec(change_color)
+
     # updates the dynamic values of the interface
     def update_values(self):
         self.v.set(self.game.get_tries() + " / 10")
         self.word.set(self.game.hashed_word())
-
-        words = ""
-        for letter in self.game.words_guessed:
-            words = words + " " + letter + " "
-        self.already_guessed.set("Already guessed: " + words)
         self.message.set(self.guess_output)
 
 

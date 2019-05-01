@@ -8,7 +8,7 @@ column = 0
 for letter in letters:
             # create new button
             print("self.{}_button = Button(master, text='{}',"
-                  " command=lambda: self.greet('{}'), height=2, width=3)"
+                  " command=lambda: self.make_guess('{}'), height=2, width=3)"
                   .format(letter, letter.capitalize(), letter))
             # give the just created button a position
             print("self.{}_button.grid(row={}, column={})"
